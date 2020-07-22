@@ -212,7 +212,7 @@ public class AdvancedSettings : SettingsGroup
 	public bool		SaveFileCompression { get { return LookupBool("SaveFileCompression"); } set { SetValue("SaveFileCompression", value); } }
 
 	/** Enables compression on data files.  Typically reducing the size to a tenth.  This is required for storing game data in player prefs on the webplayer.  */
-	public bool		DataFileCompression { get { return (Application.isWebPlayer ? true : LookupBool("DataFileCompression")); } set { SetValue("DataFileCompression", value); } }
+	public bool		DataFileCompression { get { return (Application.platform == RuntimePlatform.WebGLPlayer ? true : LookupBool("DataFileCompression")); } set { SetValue("DataFileCompression", value); } }
 
 	public bool 	AutoFight { get { return LookupBool("AutoFight"); } set { SetValue("AutoFight", value); } }
 

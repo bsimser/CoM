@@ -61,12 +61,14 @@ class AutoBuilder
 	static void BuildAll()
 	{		
 		setup();
-		BuildToTarget(basePath + "EnduranceWebStreamed", BuildTarget.WebPlayerStreamed);
-		BuildToTarget(basePath + "EnduranceWeb", BuildTarget.WebPlayer);
+		// TODO used to be WebPlayerStreamed so maybe this can be removed completely?
+		BuildToTarget(basePath + "EnduranceWebStreamed", BuildTarget.WebGL);
+        // TODO used to be WebPlayer so maybe this can be removed completely?
+		BuildToTarget(basePath + "EnduranceWeb", BuildTarget.WebGL);
 		BuildToTarget(basePath + "EnduranceWebGL", BuildTarget.WebGL);
 		BuildToTarget(basePath + "EnduranceiOS", BuildTarget.iOS);
 		BuildToTarget(basePath + "EnduranceLinux", BuildTarget.StandaloneLinuxUniversal);
-		BuildToTarget(basePath + "EnduranceOSX", BuildTarget.StandaloneOSXUniversal);
+		BuildToTarget(basePath + "EnduranceOSX", BuildTarget.StandaloneOSX);
 		BuildToTarget(basePath + "EnduranceWin.exe", BuildTarget.StandaloneWindows, true);		
 	}
 }

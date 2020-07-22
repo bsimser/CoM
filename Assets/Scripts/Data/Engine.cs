@@ -9,6 +9,7 @@ using UI.DragDrop;
 using Data;
 using Smaa;
 using AlpacaSound;
+using UnityEngine.Profiling;
 
 /** Records statistics on how long it took to create the last frame */
 public struct PerformanceStats
@@ -427,7 +428,8 @@ public class Engine : MonoBehaviour
 
 		try {
 			if (isWebGL) {
-				if (!Caching.enabled) {
+				// TODO used to be Caching.enabled so is .ready the same as .enabled?
+				if (!Caching.ready) {
 					Trace.Log("Caching is Enabled.");
 				} else {
 					Trace.Log("Caching is Disabled, cleaning...");
@@ -489,13 +491,9 @@ public class Engine : MonoBehaviour
 		get { return Application.platform == RuntimePlatform.WebGLPlayer; }
 	}
 
-	public static bool isWebPlayer {
-		get { return Application.platform == RuntimePlatform.WindowsWebPlayer || Application.platform == RuntimePlatform.OSXWebPlayer; }
-	}
-
 	/** True if we are playing on either the Unity Web Player or the WebGL player. */
 	public static bool isWeb {
-		get { return isWebGL || isWebPlayer; }
+		get { return isWebGL; }
 	}
 
 	public void ApplyQualityLevel(int newLevel)
@@ -996,16 +994,20 @@ public class Engine : MonoBehaviour
 
 	private static bool isSSAOEnabled {
 		get {
+			/* TODO need replacement for SSAOPro (maybe with post processing?)
 			var aoScript = Engine.Instance.Camera.GetComponent<SSAOPro>();
 			if (aoScript == null)
 				return false;
 			return aoScript.enabled;
+			*/
+			return false;
 		}
 	}
 
 	/** Enables or disables SSAO. */
 	private static void ApplySSAO(bool value)
-	{		
+	{
+		/* TODO need replacement for SSAOPro (maybe with post processing?)
 		var aoScript = Engine.Instance.Camera.GetComponent<SSAOPro>();
 
 		if (aoScript == null)
@@ -1048,6 +1050,7 @@ public class Engine : MonoBehaviour
 				aoScript.DebugAO = false;
 				break;
 		}
+		*/
 	}
 
 	/** Applies given FX style. */
@@ -1055,16 +1058,20 @@ public class Engine : MonoBehaviour
 	{
 		FXStyle = newStyle;
 		var retroScript = Engine.Instance.Camera.GetComponent<RetroPixel>();
+		/* TODO need replacement for SSAOPro (maybe with post processing?)
 		var aoScript = Engine.Instance.Camera.GetComponent<SSAOPro>();
+		*/
 
 		if (retroScript != null) {
 			retroScript.enabled = (FXStyle == RenderFXStyle.Retro);
 		}
 
+		/* TODO need replacement for SSAOPro (maybe with post processing?)
 		if (aoScript != null) {
 			aoScript.enabled = (FXStyle == RenderFXStyle.Sketch);
 			ApplySSAO(Settings.General.EnableSSAO);
 		}
+		*/
 
 		ApplyTextureSwapper();
 	}
