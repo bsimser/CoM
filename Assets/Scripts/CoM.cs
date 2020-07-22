@@ -750,7 +750,7 @@ public class CoM : Engine
 		Instance.ItemIconSprites = LoadGraphicResources(ItemIconsAtlasPath);
 		Instance.SpellIconSprites = LoadGraphicResources(SpellIconsAtlasPath);
 		Instance.IconSprites = LoadGraphicResources(IconsAtlasPath, "NotFound");
-		Instance.Portraits = SpriteLibrary.FromXML(PortraitsXMLPath);
+        Instance.Portraits = LoadGraphicResources(PortraitsXMLPath);
 
 		Util.Assert(TextureMagic.IsReadable(Instance.MapIconSprites[0].texture), "Map sprites atlas needs to be set to readable under import settings (advanced).");
 
